@@ -1,17 +1,15 @@
 import { AxiosHttpClient } from './axios-http-client'
+import { type HttpPostParams } from '@/data/protocols/http'
 import axios from 'axios'
 import { faker } from '@faker-js/faker'
-import { type HttpPostParams } from '@/data/protocols/http'
 
 jest.mock('axios')
 
 const mockedAxios = axios as jest.Mocked<typeof axios>
-
 const mockedAxiosResult = {
   data: faker.internet.jwt(),
   status: faker.internet.httpStatusCode()
 }
-
 mockedAxios.post.mockResolvedValue(mockedAxiosResult)
 
 const makeSut = (): AxiosHttpClient => {
